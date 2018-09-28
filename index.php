@@ -91,6 +91,8 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 			<span class="bonWeek" style="color: white;font-size: 18px;font-family: Norican;text-align: center;text-transform: capitalize;">Bon Week'</span>
 		</div>
 		<img id="sandwich" src="imgs/sandwich.png" width="115" height="59"  style="z-index: 800; position: absolute;" />
+		<img id="sandwich2" src="imgs/sandwich.png" width="115" height="59"  style="z-index: 800; position: absolute; left: 160px;" />
+
 		<div class="imageblock col" style="z-index: 10; width: 100%">
 			<img  id="menuImg" src="imgs/menu.jpg" width="680" height="100%" style="position: relative; width:105%"/>
 		</div>
@@ -250,11 +252,15 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
         });
 	}
 	function rotateSandwich() {
-		$("#sandwich").animate({left:'92%'}, 100);
-		$("#sandwich").animate({top:'95%'}, 100);
-		$("#sandwich").animate({left:'0%', right:'105%'}, 100);
-		$("#sandwich").animate({top:'0%', bottom:'100%'}, 100);
-		setTimeout(rotateSandwich, 100);
+		$("#sandwich").animate({left:'92%'}, 600);
+		$("#sandwich").animate({top:'95%'}, 600);
+		$("#sandwich").animate({left:'0%', right:'105%'}, 600);
+		$("#sandwich").animate({top:'0%', bottom:'100%'}, 600);
+		$("#sandwich2").animate({left:'92%'}, 600);
+		$("#sandwich2").animate({top:'95%'}, 600);
+		$("#sandwich2").animate({left:'0%', right:'105%'}, 600);
+		$("#sandwich2").animate({top:'0%', bottom:'100%'}, 600);
+		setTimeout(rotateSandwich, 600);
 	}
 	function moveMan() {
 		$('#l1run').css({left:'-50%'});
