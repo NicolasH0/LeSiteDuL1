@@ -128,7 +128,7 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
 										}
 										else{
-											'<td  class="font-italic"> -- </td>';
+											echo '<td  class="font-italic"> Arrivé </td>';
 										}
 										echo '</tr>';
 									}
@@ -186,7 +186,7 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
 										}
 										else{
-											'<td  class="font-italic"> -- </td>';
+											echo '<td  class="font-italic"> Arrivé </td>';
 										}
 										echo '</tr>';
 									}
