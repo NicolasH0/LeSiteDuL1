@@ -119,9 +119,14 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 										echo '<td>Tanneries</td>';
 										echo '<td  class="font-italic">'.$horaire->Destination.'</td>';
 										echo '<td  class="font-italic">'.$horaire->Horaire.'</td>';
-										if($duration != false){
+										if($duration != false && $duration->format("%H") != "00" && $duration->format("%I") != "00"){
+											echo '<td  class="font-italic"><b>'.$duration->format("%H")."</b>h<b>".$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
+										}else if($duration != false && $duration->format("%I") != "00"){
 											echo '<td  class="font-italic"><b>'.$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
-										}else{
+										}else if($duration != false){
+											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
+										}
+										else{
 											'<td  class="font-italic"> -- </td>';
 										}
 										echo '</tr>';
@@ -172,9 +177,14 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 										echo '<td>Quartier des Quinzes</td>';
 										echo '<td  class="font-italic">'.$horaire->Destination.'</td>';
 										echo '<td  class="font-italic">'.$horaire->Horaire.'</td>';
-										if($duration != false){
+										if($duration != false && $duration->format("%H") != "00" && $duration->format("%I") != "00"){
+											echo '<td  class="font-italic"><b>'.$duration->format("%H")."</b>h<b>".$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
+										}else if($duration != false && $duration->format("%I") != "00"){
 											echo '<td  class="font-italic"><b>'.$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
-										}else{
+										}else if($duration != false){
+											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
+										}
+										else{
 											'<td  class="font-italic"> -- </td>';
 										}
 										echo '</tr>';
