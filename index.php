@@ -201,6 +201,33 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 	</div>
 <script>
 	$(document).ready(function() {
+
+		var keys = "";
+		$(document).keydown(function (e) {
+		    if(e.keyCode == 79){
+		    	keys += "o";
+		    }else if(e.keyCode == 70){
+		    	keys += "f";
+		    }else{
+		    	keys = "";
+		    }
+		});
+
+		$(document).keyup(function (e) {
+    		oof();
+		});
+
+		function oof() {
+		$('#out').html(keys);
+			if(keys == "oof"){
+	    		var roblox = "sounds/oof.mp3";
+				new Audio(roblox).play();
+	      		keys = "";
+		    }else if(keys.length == 3){
+		    	keys = "";
+		    }
+		}
+
 		rotateSandwich();
 		$("#image").css("z-index", "800");
 		$(".daily-menu").hide();
