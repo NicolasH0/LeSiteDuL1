@@ -72,7 +72,7 @@ $second_step = explode("</ul>" , $first_step[1] );
 	<div class="col-md-5" style="float : left; margin-top: 100px; position: relative; padding: 0 !important;">
 		<div class="textblock col" style="position: absolute; z-index: 20; top: 21%; right: 4%; width: 86%">
 			<?php echo $second_step[0]; ?>
-			<span class="bonWeek" style="color: white;font-size: 18px;font-family: Norican;text-align: center;text-transform: capitalize;">Bon Week'</span>
+			<span class="bonWeek" style="color: white;font-size: 50px;font-family: Norican;text-align: center;text-transform: capitalize; font-weight: bold;">Bon Week' !</span>
 		</div>
 		<img id="sandwich" src="imgs/sandwich.png" width="115" height="59"  style="z-index: 800; position: absolute;" />
 
