@@ -112,7 +112,7 @@ $second_step = explode("</ul>" , $first_step[1] );
 											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
 										}
 										else{
-											'<td  class="font-italic"> -- </td>';
+											echo '<td  class="font-italic"> Arrivé </td>';
 										}
 										echo '</tr>';
 									}
@@ -170,7 +170,7 @@ $second_step = explode("</ul>" , $first_step[1] );
 											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
 										}
 										else{
-											'<td  class="font-italic"> -- </td>';
+											echo '<td  class="font-italic"> Arrivé </td>';
 										}
 										echo '</tr>';
 									}
@@ -185,6 +185,33 @@ $second_step = explode("</ul>" , $first_step[1] );
 	</div>
 <script>
 	$(document).ready(function() {
+
+		var keys = "";
+		$(document).keydown(function (e) {
+		    if(e.keyCode == 79){
+		    	keys += "o";
+		    }else if(e.keyCode == 70){
+		    	keys += "f";
+		    }else{
+		    	keys = "";
+		    }
+		});
+
+		$(document).keyup(function (e) {
+    		oof();
+		});
+
+		function oof() {
+		$('#out').html(keys);
+			if(keys == "oof"){
+	    		var roblox = "sounds/oof.mp3";
+				new Audio(roblox).play();
+	      		keys = "";
+		    }else if(keys.length == 3){
+		    	keys = "";
+		    }
+		}
+
 		rotateSandwich();
 		$("#image").css("z-index", "800");
 		$(".daily-menu").hide();
