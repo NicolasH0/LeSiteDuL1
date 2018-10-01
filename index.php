@@ -1,25 +1,17 @@
 <?php
 date_default_timezone_set('Europe/Paris');
 $currentTime = date('H:i:s');
-
 $id = '1550';
 $password = 'ert864f';
-
 $wsdl = 'http://opendata.cts-strasbourg.fr/webservice_v4/Service.asmx?wsdl';
 $namespace = 'http://www.cts-strasbourg.fr/';
-
-
 $client = new SoapClient($wsdl,array('trace' => 1));
-
 $creditentials = array(
 'ID' => $id,
 'MDP' => $password
 );
-
 $header = new SOAPHeader($namespace,'CredentialHeader',$creditentials,false);
 $client->__setSoapHeaders($header);
-
-
 // CODES ARRET : Quartier des quinzes : 522, Tanneries : 624
 $params = [
 	'CodeArret' => '624',
@@ -27,36 +19,28 @@ $params = [
 	'Heure' => date('H:i'),
 	'NbHoraires' => 5
 ];
-
 try {
     $response = $client->rechercheProchainesArriveesWeb($params);
-    //var_dump(date('H:i'));
 }
 catch (Exception $e) {
     echo "<h2>Exception Error!</h2>";
     echo $e->getMessage();
 }
-
 function getTimeInterval($horaireBus, $heureActuelle){
 	$startTime = new DateTime($horaireBus);
 	$endTime = new DateTime($heureActuelle);
-	$duration = $startTime->diff($endTime); //$duration is a DateInterval object
+	$duration = $startTime->diff($endTime);
 
 	if($startTime > $endTime) {
 		return $duration;
 	}else{
 		return false;
 	}
-
 }
 $url = "http://www.lapetitepause.fr/";
 $content = file_get_contents($url);
-$first_step = explode( 'class="daily-menu"' , $content ); // So you will get two array elements
-
-$second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have more elements with this id (theoretical)
-
-
-
+$first_step = explode( 'class="daily-menu"' , $content );
+$second_step = explode("</ul>" , $first_step[1] );
 ?>
 
 <html>
@@ -208,12 +192,10 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 		$("p").hide();
 		$("ul").addClass("menu");
 		$(".menu").addClass("list-group");
-
 		$(".menu li").addClass("dayliMenu")
 		$(".menu").css("height", "100%");
 		$(".menu").css("width", "95%");
 		$(".menu").css("list-style", "none");
-
 		$('.menu li').text(function(_, txt) {
 		    return txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
 		});
@@ -232,8 +214,6 @@ $second_step = explode("</ul>" , $first_step[1] ); // "1" depends, if you have m
 		$(".menu li").css("text-transform", "capitalize");
 		$('body').hide().fadeIn(500);
 	});
-
-
 	$(document).mousemove(function(e){
 	   $("#image").css({left:e.pageX, top:e.pageY});
 	});
