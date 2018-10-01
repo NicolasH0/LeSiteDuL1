@@ -20,7 +20,11 @@ body{
 table th {
    text-align: center;
 }
-
+#menuImg {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 h1 {
   position:absolute;
   z-index:800;

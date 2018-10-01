@@ -141,8 +141,29 @@ include 'functions.php'
 		</table>
 	</div>
 	</div>
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     	<img src="imgs/win.gif">
+    </div>
+  </div>
+</div>
+
+
 <script>
 	$(document).ready(function() {
+		var speed = 600;
+		rotateSandwich(speed);
+		$("#sandwich").click(function() {
+			$('.modal').modal('show');
+			setTimeout(function(){
+			  $('.modal').modal('hide')
+			}, 2000);
+			speed = speed - 100;
+			console.log(speed);
+			rotateSandwich(speed);
+		});
 
 		var keys = "";
 		$(document).keydown(function (e) {
@@ -154,11 +175,9 @@ include 'functions.php'
 		    	keys = "";
 		    }
 		});
-
 		$(document).keyup(function (e) {
     		oof();
 		});
-
 		function oof() {
 		$('#out').html(keys);
 			if(keys == "oof"){
@@ -170,7 +189,6 @@ include 'functions.php'
 		    }
 		}
 
-		rotateSandwich();
 		$("#image").css("z-index", "800");
 		$(".daily-menu").hide();
 		$("h2").hide();
@@ -215,12 +233,13 @@ include 'functions.php'
             moveL1();
         });
 	}
-	function rotateSandwich() {
-		$("#sandwich").animate({left:'92%'}, 600);
-		$("#sandwich").animate({top:'95%'}, 600);
-		$("#sandwich").animate({left:'0%', right:'105%'}, 600);
-		$("#sandwich").animate({top:'0%', bottom:'100%'}, 600);
-		setTimeout(rotateSandwich, 600);
+	function rotateSandwich(speed) {
+		console.log("salope:"+ speed);
+		$("#sandwich").animate({left:'92%'}, speed);
+		$("#sandwich").animate({top:'95%'}, speed);
+		$("#sandwich").animate({left:'0%', right:'105%'}, speed);
+		$("#sandwich").animate({top:'0%', bottom:'100%'}, speed);
+		setTimeout(rotateSandwich, speed);
 	}
 	function moveMan() {
 		$('#l1run').css({left:'-50%'});
