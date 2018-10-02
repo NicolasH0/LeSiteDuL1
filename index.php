@@ -16,6 +16,7 @@ include 'functions.php'
 <img style="opacity: 0.8;" id="l1" src="imgs/L1_reversed.png" width="413" height="158"/>
 <img style="opacity: 0.8;" id="l1run" src="imgs/run.gif" width="150" height="150"/>
 <img style="opacity: 0.8;" id="l1run2" src="imgs/run2.gif" width="150" height="150"/>
+<img id="kebab" class="kebab" src="imgs/kebab.png" style="z-index: 900; position: absolute; display: none; width: 100px; height: 100px" />
 
 	<body style="background-color:#212529;">
 		<div class="centrer">
@@ -35,7 +36,7 @@ include 'functions.php'
 		<img id="sandwich" src="imgs/sandwich.png" width="115" height="59"  style="z-index: 800; position: absolute;" />
 
 		<div class="imageblock col" style="z-index: 10; width: 100%">
-			<img  id="menuImg" src="imgs/menu.jpg" width="680" height="100%" style="position: relative; width:105%"/>
+			<img  id="menuImg" src="imgs/menu.jpg" width="680" height="100%" style="z-index: 800; position: relative; width: 105%"/>
 		</div>
 	</div>
 	<div class="col-md-7" style="float : right;  padding: 0 !important;">
@@ -142,7 +143,7 @@ include 'functions.php'
 	</div>
 	</div>
 
-<div class="modal" tabindex="-1" role="dialog">
+<div id="win" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
      	<img src="imgs/win.gif">
@@ -150,18 +151,54 @@ include 'functions.php'
   </div>
 </div>
 
+<div id="eric" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     	<img src="imgs/ericzer.jpg">
+    </div>
+  </div>
+</div>
+
 
 <script>
 	$(document).ready(function() {
+
+		spawnKebab();
+
+		function spawnKebab(){	
+			setTimeout(function(){
+				console.log("spawn kebab");
+				let windowWidth = $(document).width();
+				let windowHeight = $(document).height();
+				let randWidth = Math.floor((Math.random()*windowWidth));
+				let randHeight = Math.floor((Math.random()*windowHeight));      
+				$('.kebab').css('left', randWidth);
+				$('.kebab').css('top', randHeight);
+				$('.kebab').css('display', 'block');
+				setTimeout(function(){
+					console.log("remove kebab");
+					$('.kebab').css('display', 'none');
+				}, 2000);
+			}, 2000);
+		}
+
+		$('.kebab').click(function(){
+        	$('#eric').modal('show');
+        	var yay = "sounds/yay.mp3";
+			new Audio(yay).play();
+        	setTimeout(function(){
+				$('#eric').modal('hide')
+			}, 2000);
+    	});
+
 		var speed = 600;
 		rotateSandwich(speed);
 		$("#sandwich").click(function() {
-			$('.modal').modal('show');
+			$('#win').modal('show');
 			setTimeout(function(){
-			  $('.modal').modal('hide')
+			  $('#win').modal('hide')
 			}, 2000);
 			speed = speed - 100;
-			console.log(speed);
 			rotateSandwich(speed);
 		});
 
@@ -195,7 +232,7 @@ include 'functions.php'
 		$("p").hide();
 		$("ul").addClass("menu");
 		$(".menu").addClass("list-group");
-		$(".menu li").addClass("dayliMenu")
+		$(".menu li").addClass("dayliMenu");
 		$(".menu").css("height", "100%");
 		$(".menu").css("width", "95%");
 		$(".menu").css("list-style", "none");
@@ -234,7 +271,6 @@ include 'functions.php'
         });
 	}
 	function rotateSandwich(speed) {
-		console.log("salope:"+ speed);
 		$("#sandwich").animate({left:'92%'}, speed);
 		$("#sandwich").animate({top:'95%'}, speed);
 		$("#sandwich").animate({left:'0%', right:'105%'}, speed);
