@@ -1,5 +1,5 @@
 <?php
-include 'functions.php'
+include 'functions.php';
 ?>
 <html>
 <head>
@@ -40,47 +40,7 @@ include 'functions.php'
 		</div>
 	</div>
 	<div class="col-md-7" style="float : right;  padding: 0 !important;">
-		<table class="table table-dark text-center" style="margin-top:100px">
-		  	<thead>
-			    <tr>
-					<th scope="col"></th>
-					<th scope="col">Arret</th>
-					<th scope="col">Destination</th>
-					<th scope="col">Horaire</th>
-					<th scope="col">Arrive dans</th>
-			    </tr>
-			</thead>
-			<tbody>
-		    	<tr>
-					<?php
-						foreach($response as $resp){
-							foreach($resp->ListeArrivee as $bus){
-								foreach($bus as $horaire){
-									if($horaire->Destination == "L1 Robertsau Boecklin") {
-										$duration = getTimeInterval($horaire->Horaire, $currentTime);
-										echo '<tr>';
-										echo '<td><img src="imgs/bus_v2.png" height="30" width="30"/></td>';
-										echo '<td>Tanneries</td>';
-										echo '<td  class="font-italic">'.$horaire->Destination.'</td>';
-										echo '<td  class="font-italic">'.$horaire->Horaire.'</td>';
-										if($duration != false && $duration->format("%H") != "00" && $duration->format("%I") != "00"){
-											echo '<td  class="font-italic"><b>'.$duration->format("%H")."</b>h<b>".$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
-										}else if($duration != false && $duration->format("%I") != "00"){
-											echo '<td  class="font-italic"><b>'.$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
-										}else if($duration != false){
-											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
-										}
-										else{
-											echo '<td  class="font-italic"> Arrivé </td>';
-										}
-										echo '</tr>';
-									}
-								}
-							}
-						}
-					?>
-				</tr>
-			</tbody>
+		<table class="table table-dark text-center" style="margin-top:100px" id="table_tanneries">
 		</table>
 
 		<?php
@@ -98,47 +58,7 @@ include 'functions.php'
 		    echo $e->getMessage();
 		}
 		?>
-		<table class="table table-dark text-center table-layout:fixed" style="margin-top:50px">
-		  	<thead>
-			    <tr>
-					<th scope="col"></th>
-					<th scope="col">Arret</th>
-					<th scope="col">Destination</th>
-					<th scope="col">Horaire</th>
-					<th scope="col">Arrive dans</th>
-			    </tr>
-			</thead>
-			<tbody>
-		    	<tr>
-					<?php
-						foreach($response as $resp){
-							foreach($resp->ListeArrivee as $bus){
-								foreach($bus as $horaire){
-									if($horaire->Destination == "L1 Lingolsheim Alouettes") {
-										$duration = getTimeInterval($horaire->Horaire, $currentTime);
-										echo '<tr>';
-										echo '<td><img src="imgs/bus_v2.png" height="30" width="30"/></td>';
-										echo '<td>Quartier des Quinzes</td>';
-										echo '<td  class="font-italic">'.$horaire->Destination.'</td>';
-										echo '<td  class="font-italic">'.$horaire->Horaire.'</td>';
-										if($duration != false && $duration->format("%H") != "00" && $duration->format("%I") != "00"){
-											echo '<td  class="font-italic"><b>'.$duration->format("%H")."</b>h<b>".$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
-										}else if($duration != false && $duration->format("%I") != "00"){
-											echo '<td  class="font-italic"><b>'.$duration->format("%I")."</b>min<b>".$duration->format("%S").'</b>s</td>';
-										}else if($duration != false){
-											echo '<td  class="font-italic"><b>'.$duration->format("%S").'</b>s</td>';
-										}
-										else{
-											echo '<td  class="font-italic"> Arrivé </td>';
-										}
-										echo '</tr>';
-									}
-								}
-							}
-						}
-					?>
-				</tr>
-			</tbody>
+		<table class="table table-dark text-center table-layout:fixed" style="margin-top:50px" id="table_quartierDesQuinzes">
 		</table>
 	</div>
 	</div>
@@ -164,6 +84,8 @@ include 'functions.php'
 	$(document).ready(function() {
 
 		spawnKebab();
+		getTanneries();
+		getQuartierDesQuinzes();
 
 		function spawnKebab(){	
 			setTimeout(function(){
@@ -298,6 +220,38 @@ include 'functions.php'
 		moveMan();
 		moveMan2();
 	});
+
+	function getTanneries(){
+			$.ajax({
+		    url: "cts.php",
+		    type: 'get',
+		    dataType: 'html',
+		    data: 'destination=' + 'rob',
+		    success: function(data) {
+		    	$('#table_tanneries').html(data);
+		    	setTimeout(getTanneries, 2000);
+		    },
+		    error: function(xhr, status) {
+		        //alert("Sorry, there was a problem!");
+		    },
+		});
+	}
+
+	function getQuartierDesQuinzes(){
+			$.ajax({
+		    url: "cts.php",
+		    type: 'get',
+		    dataType: 'html',
+		    data: 'destination=' + 'lingo',
+		    success: function(data) {
+		    	$('#table_quartierDesQuinzes').html(data);
+		    	setTimeout(getQuartierDesQuinzes, 2000);
+		    },
+		    error: function(xhr, status) {
+		        //alert("Sorry, there was a problem!");
+		    },
+		});
+	}
 </script>
 </body>
 </div>
